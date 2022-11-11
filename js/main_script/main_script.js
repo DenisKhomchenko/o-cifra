@@ -824,8 +824,6 @@ var registerFormValidator = function registerFormValidator() {
 
 
 
- // import '@components/tabs/scripts';
-
 
 
 

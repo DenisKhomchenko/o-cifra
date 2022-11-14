@@ -441,20 +441,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var id = item.getAttribute('id');
     var itemModal = new bootstrap_esm/* Modal */.u_(item);
     window.modal[id] = itemModal;
-  }
-
-  window.modal.list.forEach(function (e) {
-    e.addEventListener('shown.bs.modal', function () {
-      if (this.querySelector('[autofocus]')) {
-        this.querySelector('[autofocus]').focus();
-      }
-    });
-  }); // console.log(window.modal);
-  // window.modal.callback.show()
+  } // window.modal.callback.show()
   // window.modal.success.show()
   // window.modal.callback.hide()
   // window.modal.success.hide()
   // window.modal.id.hide()
+
 });
 // EXTERNAL MODULE: ./node_modules/imask/esm/index.js + 21 modules
 var esm = __webpack_require__(2647);

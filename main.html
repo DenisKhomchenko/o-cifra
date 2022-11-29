@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ced46869-96dd-498a-98b2-758dbd3ff1a5&amp;lang=ru_RU"
+      type="text/javascript"></script>
     <title>Главная</title>
     <script defer src="js/vendors/vendors.js"></script>
     <script defer src="js/main_style/main_style.js"></script>
@@ -164,7 +166,7 @@
           </div>
         </div>
       </section>
-      <section class="section section-form jsAnimate">
+      <section class="section section-form jsAnimate" data-observe-mode="2">
         <div class="container">
           <div class="section__inner">
             <div class="form-block">
@@ -737,11 +739,23 @@
                 </div>
               </div>
             </div>
+            <div class="autodiscovery-video autodiscovery__video jsAnimate">
+              <picture class="autodiscovery-video__bg">
+                <source media="(max-width: 833px)" srcset="assets\media\autodiscovery\video-bg--md.svg" /><img
+                  src="assets\media\autodiscovery\video-bg.svg" alt="" />
+              </picture>
+              <div class="autodiscovery-video__inner"> <a class="autodiscovery-video__video"
+                  href="https://www.youtube.com/watch?v=jfKfPfyJRdk" data-fancybox="video"> <img
+                    src="assets\media\autodiscovery\video.jpg" alt="" /></a>
+                <h4 class="h3 autodiscovery-video__title">Все полученные данные переносятся на веб-интерфейс, где вы
+                  можете их посмотреть на карте.</h4>
+              </div>
+            </div>
             <div class="autodiscovery-demo autodiscovery__demo jsAnimate">
               <div class="autodiscovery-demo__inner">
                 <div class="autodiscovery-demo__main">
-                  <h4 class="text-lg autodiscovery-demo__subtitle">Все полученные данные переносятся на веб-интерфейс,
-                    где вы можете их посмотреть на карте.</h4>
+                  <h4 class="text-lg autodiscovery-demo__subtitle">Система позволяет решать широкий спект задач, вот о
+                    чем нас просили в последнем внедрении:</h4>
                   <p>Система позволяет решать широкий спект задач, вот о чем нас просили в последнем внедрении:</p>
                 </div>
                 <div class="autodiscovery-demo__interface">
@@ -798,6 +812,33 @@
                 </div>
               </div><img class="form-block__bg" src="assets\media\form-bg.png" alt="" />
             </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section--dark">
+        <div class="container">
+          <div class="contacts jsAnimate"><img class="contacts__bg" src="assets\media\autodiscovery\video-bg.svg"
+              alt="" />
+            <div class="contacts__title-wrapper">
+              <p class="contacts__subtitle">КОНТАКТЫ</p>
+              <h2 class="h2 contacts__title">СВЯЗАТЬСЯ <br /> С НАМИ</h2>
+            </div>
+            <div class="contacts__map-wrapper">
+              <div class="contacts__map jsMap" data-coordinates="[ 59.946315,30.352277]"></div>
+            </div>
+            <div class="contacts__list"><a class="text-md contacts__link" href="https://yandex.ru/maps/-/CCUVNRXaxC"
+                target="_blank"> <svg class="icon">
+                  <use xlink:href="#geo"></use>
+                </svg><span>г.Санкт-Петербург,ул.Чайковского 29</span></a><a class="text-md contacts__link"
+                href="tel:8(800)123-45-78"> <svg class="icon">
+                  <use xlink:href="#phone"></use>
+                </svg><span>8(800)123-45-78</span></a><a class="text-md contacts__link" href="tel:8(123)37-67-30"> <svg
+                  class="icon">
+                  <use xlink:href="#phone"></use>
+                </svg><span>8(123)37-67-30</span></a><a class="text-md contacts__link" href="mailto:info@ocifra.tech">
+                <svg class="icon">
+                  <use xlink:href="#mail"></use>
+                </svg><span>info@ocifra.tech</span></a></div>
           </div>
         </div>
       </section>
@@ -870,6 +911,14 @@
       <symbol viewBox="0 0 24 24" id="close">
         <path
           d="M15.2483 12L21.5365 5.71182C22.4335 4.81482 22.4335 3.36052 21.5365 2.46352C20.6394 1.56652 19.1852 1.56652 18.2882 2.46352L12 8.75171L5.71182 2.46352C4.81482 1.56652 3.36052 1.56652 2.46352 2.46352C1.56652 3.36052 1.56652 4.81482 2.46352 5.71182L8.75171 12L2.46352 18.2882C1.56652 19.1852 1.56652 20.6395 2.46352 21.5365C2.91202 21.9849 3.49983 22.2092 4.08765 22.2092C4.67546 22.2092 5.26332 21.985 5.71177 21.5365L12 15.2483L18.2882 21.5365C18.7367 21.9849 19.3245 22.2092 19.9123 22.2092C20.5001 22.2092 21.0879 21.985 21.5364 21.5365C22.4334 20.6395 22.4334 19.1852 21.5364 18.2882L15.2483 12Z" />
+      </symbol>
+      <symbol viewBox="0 0 24 24" id="geo">
+        <path
+          d="M24 12C24 14.3734 23.2962 16.6935 21.9776 18.6668C20.6591 20.6402 18.7849 22.1783 16.5922 23.0865C14.3995 23.9948 11.9867 24.2324 9.65892 23.7694C7.33115 23.3064 5.19295 22.1635 3.51472 20.4853C1.83649 18.807 0.693603 16.6689 0.230581 14.3411C-0.232442 12.0133 0.00520321 9.60051 0.913455 7.4078C1.82171 5.21508 3.35978 3.34094 5.33317 2.02236C7.30656 0.703784 9.62663 3.68378e-07 12 3.68378e-07C13.576 -0.000390159 15.1366 0.309729 16.5927 0.912647C18.0488 1.51557 19.3718 2.39947 20.4862 3.51385C21.6005 4.62823 22.4844 5.95125 23.0873 7.40733C23.6903 8.86342 24.0004 10.424 24 12"
+          fill="#307FE2" />
+        <path
+          d="M12 11.6988C11.6005 11.6988 11.2174 11.5401 10.9349 11.2576C10.6524 10.9751 10.4937 10.5919 10.4937 10.1924C10.4937 9.79291 10.6524 9.40976 10.9349 9.12727C11.2174 8.84477 11.6005 8.68606 12 8.68606C12.3996 8.68606 12.7827 8.84477 13.0652 9.12727C13.3477 9.40976 13.5064 9.79291 13.5064 10.1924C13.5064 10.3902 13.4674 10.5861 13.3917 10.7689C13.316 10.9516 13.2051 11.1177 13.0652 11.2576C12.9253 11.3975 12.7593 11.5084 12.5765 11.5841C12.3937 11.6598 12.1979 11.6988 12 11.6988ZM12 5.97461C10.8814 5.97461 9.80859 6.41899 9.0176 7.20998C8.2266 8.00097 7.78223 9.07379 7.78223 10.1924C7.78223 13.3558 12 18.0255 12 18.0255C12 18.0255 16.2179 13.3558 16.2179 10.1924C16.2179 9.07379 15.7735 8.00097 14.9825 7.20998C14.1915 6.41899 13.1187 5.97461 12 5.97461Z"
+          fill="white" />
       </symbol>
       <symbol viewBox="0 0 30 30" id="phone">
         <path

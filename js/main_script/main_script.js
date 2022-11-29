@@ -4,111 +4,6 @@
 /***/ 5039:
 /***/ (function() {
 
-// const documentHeight = Math.max(
-//     document.body.scrollHeight, document.documentElement.scrollHeight,
-//     document.body.offsetHeight, document.documentElement.offsetHeight,
-//     document.body.clientHeight, document.documentElement.clientHeight
-// );
-// const windowHeight = window.innerHeight;
-// document.addEventListener('DOMContentLoaded', function(){
-//     initAnimationItems()
-//     setTimeout(() => {
-//         animationMain()
-//     }, 10);
-// })
-// document.addEventListener('scroll', function() {
-//     animationMain()
-// })
-// function animationMain() {
-//     const items = document.querySelectorAll('.jsAnimate');
-//     let windowOffsetTop = window.pageYOffset;
-//     let windowOffsetBottom = windowOffsetTop + windowHeight;
-//     updateAnimationItem()
-//     function updateAnimationItem(){
-//         for (let index = 0; index < items.length; index++) {
-//             const item = items[index];
-//             let mode = item.getAttribute('data-observe-mode');
-//             let percent = item.getAttribute('data-observe-percent');
-//             let windowMultiplier = 1;
-//             if (!item.getAttribute('data-observe-mode')) {
-//                 item.setAttribute('data-observe-mode', '1');
-//             }
-//             // SIZES 
-//             let itemHeight = item.offsetHeight;
-//             let itemOffsetTop = item.offsetTop;
-//             let itemOffsetBottom = itemOffsetTop + itemHeight;
-//             let innerTop = itemOffsetBottom - windowOffsetTop;
-//             let innerBottom = windowOffsetBottom - itemOffsetTop;
-//             if (windowHeight < itemHeight) {
-//                 windowMultiplier = windowHeight / itemHeight;
-//             }
-//             if (itemOffsetBottom >= windowOffsetTop && windowOffsetBottom >= itemOffsetTop) {
-//                 let resultPercent = percent;
-//                 if (mode == 1) {
-//                     resultPercent = mode1()
-//                 } else if (mode == 2) {
-//                     resultPercent = mode2()
-//                 } else if (mode == 3) {
-//                     resultPercent = mode3()
-//                 } else {
-//                     resultPercent = mode1()
-//                 }
-//                 updateValues(resultPercent)
-//             }
-//             function mode1() {  // MODE UpdateOneTime
-//                 if (innerBottom <= itemHeight * windowMultiplier) {
-//                     let temp = (innerBottom / itemHeight * 100) / windowMultiplier;
-//                     if (percent <= temp) {
-//                         percent = temp
-//                     }
-//                 } else if (innerTop <= itemHeight * windowMultiplier) {
-//                     let temp = (innerTop / itemHeight * 100) / windowMultiplier;
-//                     if (percent <= temp) {
-//                         percent = temp
-//                     }
-//                 } else {
-//                     percent = 100;
-//                 }
-//                 return percent;
-//             }
-//             function mode2() { // MODE UpdateOnlyDown
-//                 if (innerBottom <= itemHeight) {
-//                     percent = (innerBottom / itemHeight * 100) / windowMultiplier;
-//                 } else {
-//                     percent = 100;
-//                 }
-//             }
-//             function mode3() { // MODE UpdateAlways
-//                 if (innerBottom <= itemHeight * windowMultiplier) {
-//                     percent = (innerBottom / itemHeight * 100) / windowMultiplier;
-//                 } else if (innerTop <= itemHeight * windowMultiplier) {
-//                     percent = (innerTop / itemHeight * 100) / windowMultiplier;
-//                 } else {
-//                     percent = 100;
-//                 }
-//             }
-//             function updateValues(percent) { 
-//                 percent = Math.round(percent);
-//                 item.setAttribute('data-observe-percent', percent)
-//                 actions(percent)
-//             }
-//             function actions(percent) {
-//                 if(percent >= 25){
-//                     item.classList.add('is-animate')
-//                 } else{
-//                     item.classList.remove('is-animate')
-//                 }
-//             }
-//         }
-//     }
-// }
-// function initAnimationItems() {
-//     const items = document.querySelectorAll('.jsAnimate');
-//     for (let index = 0; index < items.length; index++) {
-//         const item = items[index];
-//         item.setAttribute('data-observe-percent', '0');
-//     }
-// }
 window.animations = {
   documentHeight: Math.max(document.body.scrollHeight, document.documentElement.scrollHeight, document.body.offsetHeight, document.documentElement.offsetHeight, document.body.clientHeight, document.documentElement.clientHeight),
   windowHeight: window.innerHeight,
@@ -119,7 +14,7 @@ window.animations = {
 
     for (var index = 0; index < items.length; index++) {
       var item = items[index];
-      !item.getAttribute('data-observe-percent') ? item.setAttribute('data-observe-percent', '0') : ''; // !item.getAttribute('data-observe-mode') ? item.setAttribute('data-observe-mode', '1') : '';
+      !item.getAttribute('data-observe-percent') ? item.setAttribute('data-observe-percent', '0') : '';
     }
   },
   update: function update() {
@@ -129,13 +24,10 @@ window.animations = {
 
     var _loop = function _loop(index) {
       var item = items[index];
-      var mode = item.getAttribute('data-observe-mode') ? item.getAttribute('data-observe-mode') : '1';
+      var mode = item.getAttribute('data-observe-mode') ? item.getAttribute('data-observe-mode') : '2';
       var percent = item.getAttribute('data-observe-percent');
       var triggerPercent = item.getAttribute('data-observe-trigger') ? item.getAttribute('data-observe-trigger') : 25;
-      var windowMultiplier = 1; // if (!item.getAttribute('data-observe-mode')) {
-      //     item.setAttribute('data-observe-mode', '1');
-      // }
-      // SIZES 
+      var windowMultiplier = 1; // SIZES 
 
       var itemHeight = item.offsetHeight;
       var itemOffsetTop = item.offsetTop;
@@ -191,6 +83,8 @@ window.animations = {
         } else {
           percent = 100;
         }
+
+        return percent;
       }
 
       function mode3() {
@@ -202,6 +96,8 @@ window.animations = {
         } else {
           percent = 100;
         }
+
+        return percent;
       }
 
       function updateValues(percent) {
@@ -353,7 +249,44 @@ addEventListener('DOMContentLoaded', function () {
 
 /***/ }),
 
-/***/ 9067:
+/***/ 5157:
+/***/ (function() {
+
+document.addEventListener('DOMContentLoaded', function () {
+  var map = document.querySelector('.jsMap');
+  var coordinates = JSON.parse(map.getAttribute('data-coordinates'));
+  ymaps.ready(init);
+
+  function init() {
+    var thisMap = new ymaps.Map(map, {
+      // Координаты центра карты.
+      // Порядок по умолчанию: «широта, долгота».
+      // Чтобы не определять координаты центра карты вручную,
+      // воспользуйтесь инструментом Определение координат.
+      center: coordinates,
+      // Уровень масштабирования. Допустимые значения:
+      // от 0 (весь мир) до 19.
+      zoom: 17
+    }),
+        myPlacemark = new ymaps.Placemark(thisMap.getCenter(), {
+      // Опции.
+      // Необходимо указать данный тип макета.
+      iconLayout: 'default#image',
+      // Своё изображение иконки метки.
+      // iconImageHref: 'assets/media/map-dot.svg',
+      // Размеры метки.
+      iconImageSize: [44, 44],
+      // Смещение левого верхнего угла иконки относительно
+      // её "ножки" (точки привязки).
+      iconImageOffset: [-22, -22]
+    });
+    thisMap.geoObjects.add(myPlacemark);
+  }
+});
+
+/***/ }),
+
+/***/ 1168:
 /***/ (function(__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -617,6 +550,18 @@ var jsSliderApp = new swiper_bundle_esm/* default */.Z('.jsSliderApp .slider__in
 });
 // EXTERNAL MODULE: ./src/components/animations/scripts.js
 var animations_scripts = __webpack_require__(5039);
+// EXTERNAL MODULE: ./node_modules/@fancyapps/ui/dist/fancybox.esm.js
+var fancybox_esm = __webpack_require__(2689);
+;// CONCATENATED MODULE: ./src/components/gallery/scripts.js
+
+window.Fancybox = fancybox_esm/* Fancybox */.KR;
+fancybox_esm/* Fancybox.bind */.KR.bind('[data-fancybox]', {
+  Image: {
+    zoom: false
+  }
+});
+// EXTERNAL MODULE: ./src/components/map/scripts.js
+var map_scripts = __webpack_require__(5157);
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/defineProperty.js
 var defineProperty = __webpack_require__(4942);
 // EXTERNAL MODULE: ./node_modules/gator/gator.js
@@ -820,7 +765,10 @@ var registerFormValidator = function registerFormValidator() {
 
 
 
+
+
 var init = function init() {
+  __webpack_require__.g.spiks = {};
   new scripts();
   formValidator_init();
   __webpack_require__.g.$ = (jquery_default());
@@ -1026,7 +974,7 @@ src_init();
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], function() { return __webpack_require__(9067); })
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, [216], function() { return __webpack_require__(1168); })
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -259,21 +259,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function init() {
     var thisMap = new ymaps.Map(map, {
-      // Координаты центра карты.
-      // Порядок по умолчанию: «широта, долгота».
-      // Чтобы не определять координаты центра карты вручную,
-      // воспользуйтесь инструментом Определение координат.
+      controls: [],
       center: coordinates,
-      // Уровень масштабирования. Допустимые значения:
-      // от 0 (весь мир) до 19.
       zoom: 17
     }),
-        myPlacemark = new ymaps.Placemark(thisMap.getCenter(), {
+        myPlacemark = new ymaps.Placemark(thisMap.getCenter(), {}, {
       // Опции.
       // Необходимо указать данный тип макета.
       iconLayout: 'default#image',
       // Своё изображение иконки метки.
-      // iconImageHref: 'assets/media/map-dot.svg',
+      iconImageHref: 'assets/media/map-dot.svg',
       // Размеры метки.
       iconImageSize: [44, 44],
       // Смещение левого верхнего угла иконки относительно
